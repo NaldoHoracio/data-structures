@@ -73,20 +73,44 @@ int print_front_queue(queue_ed *queue)
   return queue->items[queue->front];
 }
 
+//Invertendo a fila
+void invert_queue(queue_ed *queue)
+{
+  int i;
+  queue_ed *queue_aux = create_queue_ed();//Criando uma fila auxiliar
+
+  for(i = (queue->rear-1); i >= 0; --i)
+  {
+    //Enfileirando: o ultimo eh o primeiro, o penultimo eh o segundo...
+    enqueue_ed(queue_aux,queue->items[i]);
+  }
+  //Realocando na fila
+  for(i = 0; i < queue_aux->rear; ++i)
+  {
+    enqueue_ed(queue,queue_aux->items[i]);
+  }
+}
+
 int main()
 {
-  int continuar = 1;
-  int number;
-  queue_ed *my_queue = create_queue_ed();//Criando a fila
+  int i, number;
+  queue_ed *queue = create_queue_ed();//Cria a fila vazia
 
-  do {
-    scanf("%d", &number);
-    enqueue_ed(my_queue,number);
-    printf("Continuar (0 - Nao/ 1 - Sim)\n");
-    scanf("%d", &continuar);
-  } while(continuar);
-
-  //Imprimindo a fila
-  dequeue_ed(my_queue);
+  for(i = 0; i < 5; ++i)
+  {
+    printf("Digite um numero:\n");
+    scanf("%d", &number);//Lendo numero
+    enqueue_ed(queue,number);
+  }
+  printf("O tamanho da fila eh: %d\n", size_queue(queue));
+  printf("A fila eh:\n");
+  while(!is_empty_ed(queue))
+  {
+    //Imprimindo a fila
+    printf("%d\n", dequeue_ed(queue));
+  }
+  printf("\n");
+  printf("Fila invertida:\n");
+  invert_queue(queue);//Chamando a função para inverter a fila
   return 0;
 }
