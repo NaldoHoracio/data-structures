@@ -1,5 +1,10 @@
+/*
+* Create by Edvonaldo
+* September 11th, 2018.
+*/
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 
 #define MAX_QUEUE_SIZE 100
@@ -72,6 +77,26 @@ int print_front_queue(q_ed *queue)
   return queue->items[queue->front];
 }
 
+//Função para avaliar uma expressão
+//Se for um numero entre 0 e 9 o caracter eh correto e retorna 1
+//Se nao for, retorna 0
+int valid_expression(char c)
+{
+  int is_valid = 0;
+  if(c == '0' || c == '1' || c == '2' || c == '3' || c == '4')
+  {
+    is_valid = 1;
+  }
+  else if(c == '5' || c == '6' || c == '7' || c == '8' || c == '9')
+  {
+    is_valid = 1;
+  }else
+  {
+    is_valid = 0;
+  }
+  return is_valid;
+}
+
 int main()
 {
   int continuar = 1, i;
@@ -80,13 +105,22 @@ int main()
 
   do {
     printf("Digite um numero:\n");
-    scanf("%s", &n);
+    scanf("%s", n);
     getchar();//Lendo \n
+
     //Testando a entrada
     for(i = 0; i < strlen(n); ++i)
     {
-      if(n[i] == '')
+      if(valid_expression(n[i]) == 1)
+      {
+        continue;
+      }else{
+        printf("Expressao invalida!\n");
+        exit(1);
+      }
     }
+    int number;
+    number = atoi(n);//Transforma a string cujos caracteres sao digitos em um inteiro e coloca em number
     enqueue_ed(q,number);//Colocando numero na fila
 
     printf("Deseja continuar?(0 - Nao/1 - Sim):\n");
