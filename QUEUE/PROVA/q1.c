@@ -75,22 +75,31 @@ int print_front_queue(q_ed *queue)
 int main()
 {
   int continuar = 1, i;
-  int number;
+  char n[50];
   q_ed *q = create_queue_ed();//Criando fila
 
   do {
     printf("Digite um numero:\n");
-    scanf("%d", &number);
+    scanf("%s", &n);
+    getchar();//Lendo \n
+    //Testando a entrada
+    for(i = 0; i < strlen(n); ++i)
+    {
+      if(n[i] == '')
+    }
     enqueue_ed(q,number);//Colocando numero na fila
 
     printf("Deseja continuar?(0 - Nao/1 - Sim):\n");
+    scanf("%d", &continuar);
   } while(continuar == 1);
 
   q_ed *q_pair = create_queue_ed();
 
   for(i = 0; i < size_queue(q); ++i)
   {
-    if((fabs(q->items[i]) % 2 == 0 && fabs(q->items[i]) != 0)
+    int element = q->items[i];
+
+    if(abs(element) % 2 == 0 && abs(element) != 0)
     {
       enqueue_ed(q_pair,q->items[i]);
     }
