@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define MAX_QUEUE 100
+#define MAX_QUEUE_SIZE 100
 
 struct queue
 {
   int front, rear;
-  int items[MAX_QUEUE];
-}q_ed;
+  int items[MAX_QUEUE_SIZE];
+};
+
+typedef struct queue q_ed;//Definindo o tipo q_ed
 
 q_ed* create_queue_ed()
 {
@@ -70,24 +72,6 @@ int print_front_queue(q_ed *queue)
   return queue->items[queue->front];
 }
 
-//Invertendo a fila
-void invert_queue(q_ed *queue)
-{
-  int i;
-  q_ed *q_aux = create_queue_ed();//Criando uma fila auxiliar
-
-  for(i = (queue->rear-1); i >= 0; --i)
-  {
-    //Enfileirando: o ultimo eh o primeiro, o penultimo eh o segundo...
-    enqueue_ed(queue_aux,queue->items[i]);
-  }
-  //Realocando na fila
-  for(i = 0; i < queue_aux->rear; ++i)
-  {
-    enqueue_ed(queue,queue_aux->items[i]);
-  }
-}
-
 int main()
 {
   int continuar = 1, i;
@@ -106,7 +90,7 @@ int main()
 
   for(i = 0; i < size_queue(q); ++i)
   {
-    if(fabs(q->items[i]) % 2 == 0 && fabs(q->items[i]) != 0)
+    if((fabs(q->items[i]) % 2 == 0 && fabs(q->items[i]) != 0)
     {
       enqueue_ed(q_pair,q->items[i]);
     }
