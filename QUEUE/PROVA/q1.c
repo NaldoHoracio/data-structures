@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define MAX_QUEUE 100
 
@@ -89,5 +90,41 @@ void invert_queue(q_ed *queue)
 
 int main()
 {
-  int i, number;
+  int continuar = 1, i;
+  int number;
+  q_ed *q = create_queue_ed();//Criando fila
+
+  do {
+    printf("Digite um numero:\n");
+    scanf("%d", &number);
+    enqueue_ed(q,number);//Colocando numero na fila
+
+    printf("Deseja continuar?(0 - Nao/1 - Sim):\n");
+  } while(continuar == 1);
+
+  q_ed *q_pair = create_queue_ed();
+
+  for(i = 0; i < size_queue(q); ++i)
+  {
+    if(fabs(q->items[i]) % 2 == 0 && fabs(q->items[i]) != 0)
+    {
+      enqueue_ed(q_pair,q->items[i]);
+    }
+  }
+  printf("Fila original:\n");
+  while (!is_empty_ed(q))
+  {
+    printf("%d\n", dequeue_ed(q));
+  }
+  printf("\n");
+  printf("Fila apenas com numeros pares:\n");
+  if(is_empty_ed(q_pair)){printf("Nao ha elementos pares na fila!\n");}
+  else
+  {
+    while (!is_empty_ed(q_pair))
+    {
+      printf("%d\n", dequeue_ed(q_pair));
+    }
+  }
+  return 0;
 }
