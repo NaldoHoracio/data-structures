@@ -168,15 +168,18 @@ int main()
     printf("Digite a prioridade:\n");
     scanf("%s", priority);
     getchar();//Lendo \n
-    if(priority[0] != '0' && priority[0] != '1')
+    for(i = 0; i < strlen(priority); ++i)
     {
-      printf("Prioridade invalida!\n");
-      exit(1);
-    }else
-    {
-        int priority_number = atoi(priority);
-        enqueue_ed(q,number,priority_number);//Colocando numero na fila
-        enqueue_ed(q_ordered,number,priority_number);
+      if(priority[i] != '0' && priority[i] != '1')
+      {
+        printf("Prioridade invalida!\n");
+        exit(1);
+      }else
+      {
+          int priority_number = atoi(priority);
+          enqueue_ed(q,number,priority_number);//Colocando numero na fila
+          enqueue_ed(q_ordered,number,priority_number);
+      }
     }
 
     printf("Deseja continuar?(0 - Nao/1 - Sim):\n");
