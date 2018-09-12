@@ -64,7 +64,7 @@ void enqueue_ed(pq_ed *queue, int item, int priority)
 }
 
 //Função para desenfileirar
-int dequeue_ed(pq_ed *queue)
+void dequeue_ed(pq_ed *queue)
 {
   int i, element_dequeue, priority_element;
   if(is_empty_ed(queue))
@@ -81,7 +81,7 @@ int dequeue_ed(pq_ed *queue)
     //Já troca tambem a prioridade
   }
   queue->rear--;//Subtrai 1 do rear atualizando a posição do último elemento
-  return element_dequeue;
+  printf("Elemento: %d - %d (prioridade).\n", element_dequeue, priority_element);
 }
 
 //Função para imprimir o elemento da cabeça da fila
@@ -108,6 +108,34 @@ int valid_expression(char c)
     is_valid = 0;
   }
   return is_valid;
+}
+
+void swap_pq(int *x, int *y)
+{
+  int temp;
+  temp = *x;
+  *x = *y;
+  *y = temp;
+}
+
+void selection_sort_pq(pq_ed *queue)
+{
+  int i, j, min;
+
+  for(i = 0; i < size_queue(queue); ++i)
+  {
+    min = i;
+    for(j = i + 1; j < size_queue(queue); ++j)
+    {
+      if(queue->items[j].priority < queue->items[min].priority)
+      {
+        min = j;
+      }
+    }
+    //Troca a prioridade e troca o item para que sua proridade não seja alterada
+    swap_pq(&queue->items[i].priority, &queue->items[min].priority);
+    swap_pq(&queue->items[i].item, &queue->items[min].item);
+  }
 }
 
 int main()
@@ -153,7 +181,21 @@ int main()
   printf("Fila de prioridade:\n");
   while(!is_empty_ed(q))
   {
-    printf("Elemento")
+    dequeue_ed(q);
+  }
+
+  printf("\nOrdenando a fila de prioridades em ordem crescente.\n");
+  selection_sort_pq(q);
+  printf("\n");
+
+  printf("Fila de prioridade em ordem crescente:\n");
+
+  if(is_empty_ed(q)){printf("A fila esta vazia!\n");}
+  else{
+    while (!is_empty_ed(q))
+    {
+      dequeue_ed(q);
+    }
   }
 
   return 0;
