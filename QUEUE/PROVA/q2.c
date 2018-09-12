@@ -109,7 +109,7 @@ int valid_expression(char c)
   }
   return is_valid;
 }
-
+//Função de troca de valores
 void swap_pq(int *x, int *y)
 {
   int temp;
@@ -118,6 +118,7 @@ void swap_pq(int *x, int *y)
   *y = temp;
 }
 
+//Selection sort para colocar a fila em ordem crescente de prioridade
 void selection_sort_pq(pq_ed *queue)
 {
   int i, j, min;
@@ -140,9 +141,10 @@ void selection_sort_pq(pq_ed *queue)
 
 int main()
 {
-  int continuar = 1, i, priority;
-  char n[50];
-  pq_ed *q = create_queue_ed();//Criando fila
+  int continuar = 1, i;
+  char n[50], priority[1];
+  pq_ed *q = create_queue_ed();//Criando fila principal
+  pq_ed *q_ordered = create_queue_ed();//Criando fila que vai ser ordenada
 
   do {
     printf("Digite um numero:\n");
@@ -164,37 +166,40 @@ int main()
     number = atoi(n);//Transforma a string cujos caracteres sao digitos em um inteiro e coloca em number
 
     printf("Digite a prioridade:\n");
-    scanf("%d", &priority);
-    if(priority != 0 && priority != 1)
+    scanf("%s", priority);
+    getchar();//Lendo \n
+    if(priority[0] != '0' && priority[0] != '1')
     {
       printf("Prioridade invalida!\n");
       exit(1);
     }else
     {
-        enqueue_ed(q,number,priority);//Colocando numero na fila
+        int priority_number = atoi(priority);
+        enqueue_ed(q,number,priority_number);//Colocando numero na fila
+        enqueue_ed(q_ordered,number,priority_number);
     }
 
     printf("Deseja continuar?(0 - Nao/1 - Sim):\n");
     scanf("%d", &continuar);
   } while(continuar == 1);
 
-  printf("Fila de prioridade:\n");
+  printf("Fila de prioridade nao ordenada:\n");
   while(!is_empty_ed(q))
   {
     dequeue_ed(q);
   }
 
-  printf("\nOrdenando a fila de prioridades em ordem crescente.\n");
-  selection_sort_pq(q);
+  printf("\nOrdenando a fila de prioridades em ordem crescente...\n");
+  selection_sort_pq(q_ordered);
   printf("\n");
 
   printf("Fila de prioridade em ordem crescente:\n");
 
-  if(is_empty_ed(q)){printf("A fila esta vazia!\n");}
+  if(is_empty_ed(q_ordered)){printf("A fila esta vazia!\n");}
   else{
-    while (!is_empty_ed(q))
+    while (!is_empty_ed(q_ordered))
     {
-      dequeue_ed(q);
+      dequeue_ed(q_ordered);
     }
   }
 
