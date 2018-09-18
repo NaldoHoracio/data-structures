@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #define SIZE_VECTOR 5
 
 void swap(int *x, int *y)
@@ -39,12 +40,13 @@ void bubble_sort_recursive(int *vector, int lenght)
   int i = 0, j, temp;
   if(i >= (lenght-1))
   {
-    return bubble_sort_recursive(vector, lenght);
-  }else
-  {
+    return;
+  }else{
     if(j >= lenght)
     {
       bubble_sort_recursive(i+1,i+2);
+    }else{
+
     }
   }
 }
