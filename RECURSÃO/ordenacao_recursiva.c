@@ -16,10 +16,10 @@ void swap(int *x, int *y)
   *y = temp;
 }
 
-//Bubble sort não recursivo
+//Bubble sort crescente não recursivo
 void bubble_sort_no_recursive(int *vector, int lenght)
 {
-  int i, j, temp;
+  int i, j;
 
   for(i = 0; i < (lenght - 1); ++i)
   {
@@ -34,21 +34,21 @@ void bubble_sort_no_recursive(int *vector, int lenght)
   }
 }
 
-//Bubble sort na forma recursiva
+//Bubble sort crescente na forma recursiva
 void bubble_sort_recursive(int *vector, int lenght)
 {
-  int i = 0, j, temp;
-  if(i >= (lenght-1))
+  int i;
+  if(lenght == 1)
   {
     return;
   }else{
-    if(j >= lenght)
+    i = 0;
+    if(i < (lenght - 1))
     {
-      bubble_sort_recursive(i+1,i+2);
-    }else{
-
-    }
+      swap(&vector[i], &vector[i+1]);
+    }i++;
   }
+  bubble_sort_recursive(vector, lenght-1);
 }
 
 int main()
@@ -62,7 +62,8 @@ int main()
     scanf("%d", &vector[i]);
   }
   //Aplicando bubble_sort_no_recursive
-  bubble_sort_no_recursive(vector,SIZE_VECTOR);
+  //bubble_sort_no_recursive(vector,SIZE_VECTOR);
+  bubble_sort_recursive(vector,SIZE_VECTOR);
 
   printf("Vetor ordenado com bubble sort:\n");
   for(i = 0; i < SIZE_VECTOR; ++i)
