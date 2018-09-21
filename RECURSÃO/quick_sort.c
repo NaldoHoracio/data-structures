@@ -35,60 +35,60 @@ void quick_sort_no_recursive(int *vector, int began, int end)
 		}
 	}
 	if(j > began)
-		quick_sort_no_recursive(vector, began, j+1);
+	quick_sort_no_recursive(vector, began, j+1);
 	if(i < end)
-		quick_sort_no_recursive(vector, i, end);
+	quick_sort_no_recursive(vector, i, end);
 }
 
 //Partition
 int partition(int *vector, int left, int right)
 {
-  int i;
-  int middle = left;   // m: indice do ponto médio
+	int i;
+	int middle = left;   // m: indice do ponto médio
 
 	i = left + 1;
 	if(i <= right)
 	{
 		if(vector[i] < vector[left])
 		{
-		 middle++;
-		 swap_function(&vector[i], &vector[middle]);
+			middle++;
+			swap_function(&vector[i], &vector[middle]);
 		}
 		i++;
 	}
 	swap_function(&vector[left],&vector[middle]);
-  return middle;
+	return middle;
 }
 
 //Quick sort recursivo
 void quick_sort_recursive(int *vector, int began, int end)
 {
-  int middle;
+	int middle;
 
-  //Caso base
-  if(began >= end) return;
+	//Caso base
+	if(began >= end) return;
 	//Pivô
 	middle = partition(vector,began,end);
-  //Ordena até SIZE_VECTOR - 1
-  quick_sort_recursive(vector,began,middle-1);
-  //Ordena de SIZE_VECTOR
-  quick_sort_recursive(vector,middle+1,end);
+	//Ordena até SIZE_VECTOR - 1
+	quick_sort_recursive(vector,began,middle-1);
+	//Ordena de SIZE_VECTOR
+	quick_sort_recursive(vector,middle+1,end);
 }
 
 int main()
 {
-  int i, vector[SIZE_VECTOR];
-  printf("Digite os numeros:\n");
+	int i, vector[SIZE_VECTOR];
+	printf("Digite os numeros:\n");
 
-  for(i = 0; i < SIZE_VECTOR; ++i)
-  {
-    scanf("%d", &vector[i]);
-  }
-  //Usando quick_sort nao recursivo
-  quick_sort_no_recursive(vector,0,SIZE_VECTOR);
-  printf("Vetor ordenado com quick sort:\n");
-  for(i = 0; i < SIZE_VECTOR; ++i)
-  {
-    printf("Elemento %d --> %d\n", i, vector[i]);
-  }
+	for(i = 0; i < SIZE_VECTOR; ++i)
+	{
+		scanf("%d", &vector[i]);
+	}
+	//Usando quick_sort nao recursivo
+	quick_sort_no_recursive(vector,0,SIZE_VECTOR);
+	printf("Vetor ordenado com quick sort:\n");
+	for(i = 0; i < SIZE_VECTOR; ++i)
+	{
+		printf("Elemento %d --> %d\n", i, vector[i]);
+	}
 }
