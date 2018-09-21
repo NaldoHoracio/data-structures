@@ -56,6 +56,8 @@ void merge_recursive(int vector[], int middle, int end, int aux[])
 //Merge sort recursivo
 void merge_sort_recursive(int vector[], int beggin, int end)
 {
+    int size = end - beggin + 1;
+    int *aux = (int*)malloc(size * sizeof(int));
     if (beggin < end) {
         int middle = (end + beggin)/2;
         merge_sort_recursive(vector, beggin, middle);
