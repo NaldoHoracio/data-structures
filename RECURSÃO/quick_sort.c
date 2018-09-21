@@ -4,6 +4,13 @@
 #include <math.h>
 #define SIZE_VECTOR 5
 
+void swap_function(int *x, int *y)
+{
+	int temp = *x;
+	*x = *y;
+	*y = temp;
+}
+
 void quick_sort_no_recursive(int *vector, int began, int end)
 {
 	int i, j, pivo, aux;
@@ -22,9 +29,7 @@ void quick_sort_no_recursive(int *vector, int began, int end)
 		}
 		if(i <= j)
 		{
-			aux = vector[i];
-			vector[i] = vector[j];
-			vector[j] = aux;
+			swap_function(&vector[i], &vector[j]);
 			i++;
 			j--;
 		}
@@ -35,23 +40,39 @@ void quick_sort_no_recursive(int *vector, int began, int end)
 		quick_sort_no_recursive(vector, i, end);
 }
 
+//Partition
+int partition(int *vector, int left, int right)
+{
+  int i;
+  int middle = left;   // m: indice do ponto médio
+
+	i = left + 1;
+	if(i <= right)
+	{
+		if(vector[i] < vector[left])
+		{
+		 middle++;
+		 swap_function(&vector[i], &vector[middle]);
+		}
+		i++;
+	}
+	swap_function(&vector[left],&vector[middle]);
+  return middle;
+}
+
 //Quick sort recursivo
 void quick_sort_recursive(int *vector, int began, int end)
 {
-  int aux;
+  int middle;
 
   //Caso base
-  if(began >= end)
-  {
-    return;
-  }else{//Caso recursivo
-    m = partition(vector,began,end);
-  }
-  //Usando Pivô
+  if(began >= end) return;
+	//Pivô
+	middle = partition(vector,began,end);
   //Ordena até SIZE_VECTOR - 1
-  quick_sort_recursive(vector,began,aux-1);
+  quick_sort_recursive(vector,began,middle-1);
   //Ordena de SIZE_VECTOR
-  quick_sort_recursive(vector,aux+1,end);
+  quick_sort_recursive(vector,middle+1,end);
 }
 
 int main()
