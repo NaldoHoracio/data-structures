@@ -20,13 +20,6 @@ node_ed* create_linked_list_ed()
   return NULL;
 }
 
-//Criando a lista - modo 2
-node_ed* create_linked_list_ed2(node_ed *node, int item)
-{
-  node->item = item;
-  node->next_node = NULL;
-  return node;
-}
 //Lista vazia
 int is_empty_ed(node_ed *head)
 {
@@ -66,7 +59,8 @@ void print_linked_list_no_recursive_ed(node_ed *head)
 //Imprimindo a lista - forma recursiva
 void print_linked_list_recursive_ed(node_ed *head)
 {
-  while(!is_empty_ed(head))
+  if(is_empty_ed(head)) return;
+  else
   {
     printf("%d\n", head->item);
     print_linked_list_recursive_ed(head->next_node);
@@ -86,34 +80,43 @@ bool search_element_ed(node_ed *head, int item)
   return false;
 }
 //Removendo elemento
-node_ed* remove_node_ed(node_ed *head, int item)
+void remove_node_ed(node_ed *head, int item)
 {
   node_ed *previous = NULL;
   node_ed *current = head;
+
+  if(current != NULL && current->item == item)
+  {
+    head = current->next_node;
+    free(current);
+    return;
+  }
+
   while (current != NULL && current->item != item)
   {
     previous = current;
     current = current->next_node;
   }
-  if(current == NULL)
-  {
-    return head;
-  }
-  if(previous = NULL)
-  {
-    head = current->next_node;
-  }else
-  {
-    previous->next_node = current->next_node;
-  }
+
+  if(current == NULL) return;
+
+  previous->next_node = current->next_node;
+
   free(current);
-  return head;
+}
+//Removendo todas as ocorrencias de um numero em uma Lista
+void remove_all_ocorrences_ll(node_ed *head, int item)
+{
+  while(!is_empty_ed(head))
+  {
+    
+  }
 }
 
 int main()
 {
   node_ed *ll_head = create_linked_list_ed();
-  node_ed *ll_last = create_linked_list_ed();
+  //node_ed *ll_last = create_linked_list_ed();
   int n, i;
 
   for(i = 0; i < SIZE; ++i)
@@ -126,5 +129,28 @@ int main()
   printf("Lista:\n");
   print_linked_list_recursive_ed(ll_head);
   printf("\n");
+
+  printf("Digite um numero que voce deseja procurar:\n");
+  scanf("%d", &n);
+  if(search_element_ed(ll_head, n) == true) printf("O elemento %d esta na lista.\n", n);
+  else printf("O elemento %d nao esta na lista.\n", n);
+
+  printf("Digite um numero que voce deseja remover:\n");
+  scanf("%d", &n);
+
+  if(search_element_ed(ll_head, n) == true)
+  {
+    remove_node_ed(ll_head, n);
+    printf("Lista sem o elemento %d:\n", n);
+    print_linked_list_recursive_ed(ll_head);
+    printf("\n");
+  }else
+  {
+    printf("O elemento %d nao esta na lista.\n", n);
+    printf("Lista:\n");
+    print_linked_list_recursive_ed(ll_head);
+    printf("\n");
+  }
+
   return 0;
 }
