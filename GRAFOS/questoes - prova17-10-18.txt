@@ -1,0 +1,3 @@
+GRAFO
+1) Se é conexo
+2) Se tem loop
