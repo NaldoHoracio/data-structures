@@ -1,0 +1,5 @@
+﻿GRAFO
+1) Se é conexo
+2) Se tem loop
+3) É completo
+4) Caminho de um vértice para outro vértice
