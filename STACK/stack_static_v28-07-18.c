@@ -66,32 +66,65 @@ int peek_ed(stack_ed *stack)
    else return -1;
 }
 
+int size_stack(stack_ed *stack)
+{
+  return (stack->current_size);
+}
+
+int numb;
+stack_ed *stk_pair = create_stack_ed();
+
+void pair_element_recursive(stack_ed *stack)
+{
+  if(size_stack(stack) > 0)
+  {
+    numb = pop_ed(stack);
+    if(numb % 2 == 0 && numb != 0)
+    {
+      push_stack_ed(stk_pair,numb);
+    }
+    pair_element_recursive(stack);
+  }else{
+    return;
+  }
+}
+/*
+//Pilha invertida
+stack_ed *stk_pair_inver = create_stack_ed();
+
+void invert_stack(stack_ed *stack)
+{
+  int pair_number;
+  while (!is_empty_ed(stack))
+  {
+    pair_number = pop_ed(stack);
+    push_stack_ed(stk_pair_inver, pair_number);
+  }
+}
+*/
 int main()
 {
   stack_ed *my_stack = create_stack_ed();//Criando a pilha
-  push_stack_ed(my_stack,6);
-  push_stack_ed(my_stack,7);
-  push_stack_ed(my_stack,8);
-  push_stack_ed(my_stack,9);
-  push_stack_ed(my_stack,10);
-  int continues = 1;
+  int continuar = 1;
+  int number;
 
-  //Apenas imprimindo a pilha
-  while (continues)
-  {
-    printf("Pilha impressa:\n");
-    print_stack_ed(my_stack);
-    printf("\n");
-    printf("Deseja imprimir a pilha? (1 - Sim: 0 - Não):\n");
-    scanf("%d", &continues);
+  do {
+    printf("Digite um numero:\n");
+    scanf("%d", &number);
+    push_stack_ed(my_stack,number);
+    printf("Continuar?(0 - Nao/1 - Sim):\n");
+    scanf("%d", &continuar);
+    /* code */
+  } while(continuar == 1);
+
+  pair_element_recursive(my_stack);
+
+  //Se a pilha está vazia
+  if(is_empty_ed(stk_pair)){printf("Pilha vazia!\n");}
+  else{//Se a pilha não está vazia
+    printf("Pilha com elementos pares e invertida:\n");
+    print_stack_ed(stk_pair);
   }
-  /*
-  printf("Removendo os elementos da pilha:\n");
-  //Destruindo a pilha
-  while (!is_empty_ed(my_stack))
-  {
-    printf("Elemento %d da pilha: %d.\n", my_stack->current_size, pop_ed(my_stack));
-  }
-  */
+
   return 0;
 }

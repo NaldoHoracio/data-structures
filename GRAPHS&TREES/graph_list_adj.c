@@ -32,7 +32,8 @@ graph_ed* create_graph()
 {
   graph_ed *graph = (graph_ed*) malloc(sizeof(graph_ed));
   int i;
-  for (i = 1; i <= MAX_SIZE - 1; i++) {
+  for (i = 1; i <= MAX_SIZE - 1; i++)
+  {
     graph->vertices[i] = NULL;
     graph->visited[i] = 0;
   }
