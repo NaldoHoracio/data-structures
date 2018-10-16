@@ -91,11 +91,43 @@ void invert_queue(queue_ed *queue)
   }
 }
 
+int diff = 0, aux = 0;
+
+//Retorna a diferença dos elementos da fila
+int diff_queue(queue_ed *queue)
+{
+  int aux;
+  if(size_queue(queue) > 0)
+  {
+    aux = dequeue_ed(queue);
+    diff_queue(queue);
+  }else{
+    return (-aux);
+  }
+}
+
 int main()
 {
   int i, number;
+  int continuar = 1;
   queue_ed *queue = create_queue_ed();//Cria a fila vazia
+  int diff;
 
+  do {
+    printf("Digite um elemento da fila:\n");
+    scanf("%d", &number);
+    enqueue_ed(queue,number);
+    printf("Continuar? (0 - Nao/1 - Sim):\n");
+    scanf("%d", &continuar);
+  } while(continuar == 1);
+
+  if(is_empty_ed(queue)){printf("Fila vazia!\n");}
+  else{
+    diff = diff_queue(queue);
+    printf("Diferenca dos elementos da fila:\n");
+    printf("%d\n", diff);
+  }
+  /*
   for(i = 0; i < 5; ++i)
   {
     printf("Digite um numero:\n");
@@ -112,5 +144,6 @@ int main()
   printf("\n");
   printf("Fila invertida:\n");
   invert_queue(queue);//Chamando a função para inverter a fila
+  */
   return 0;
 }
