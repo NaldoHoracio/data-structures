@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#define SIZE_VECTOR 5
+#define SIZE_VECTOR 10
 
-//Merge nao recursivo
+//Merge
 void merge(int vector[], int beggin, int middle, int end) {
     int beggin1 = beggin, beggin2 = middle + 1, beggin_aux = 0, size = end-beggin+1;
     int *vector_aux;
