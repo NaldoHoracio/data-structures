@@ -104,15 +104,16 @@ void remove_node_ed(node_ed *head, int item)
 
   free(current);
 }
+/*
 //Removendo todas as ocorrencias de um numero em uma Lista
 void remove_all_ocorrences_ll(node_ed *head, int item)
 {
   while(!is_empty_ed(head))
   {
-    
+
   }
 }
-
+*/
 int main()
 {
   node_ed *ll_head = create_linked_list_ed();
