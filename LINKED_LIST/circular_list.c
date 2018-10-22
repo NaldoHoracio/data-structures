@@ -29,8 +29,7 @@ int is_empty_ed(node_c *head)
 node_c* add_empty_circular(node_c *head, int item)
 {
   // This function is only for empty list
-  if (head != NULL)
-    return head;
+  if (head != NULL) return head;
 
   // Creating a node dynamically.
   node_c *temp = (node_c*)malloc(sizeof(node_c));
