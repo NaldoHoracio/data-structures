@@ -9,7 +9,7 @@
 //Estrutura node
 struct Node
 {
-  char item;
+  char item, index_node = -1;
   Node *next_node;
 };
 //Definindo tipo node
@@ -26,15 +26,16 @@ int is_empty_ed(node_ed *head)
   return (head == NULL);
 }
 //Adicionando elemento no começo da fila
-node_ed* add_on_head_ed(node_ed *head, char item)
+node_ed* add_on_head_ed(node_ed *head, char item, int index_node)
 {
   node_ed *new_node = (node_ed*)malloc(sizeof(node_ed));
   new_node->item = item;
+  new_node->index_node = index_node++;
   new_node->next_node = head;
   return new_node;
 }
 //Adicionando elemento no fim da Lista
-node_ed* add_on_last_ed(node_ed *head, char item)
+node_ed* add_on_last_ed(node_ed *head, char item, int index_node)
 {
   node_ed *aux = (node_ed*)malloc(sizeof(node_ed));
   aux = head;
@@ -42,6 +43,7 @@ node_ed* add_on_last_ed(node_ed *head, char item)
   while(aux->next_node != NULL) aux = aux->next_node;
   node_ed *new_node = (node_ed*)malloc(sizeof(node_ed));
   new_node->item = item;
+  new_node->index_node = index_node++;
   new_node->next_node = NULL;
   aux->next_node = new_node;
   head = aux;
@@ -53,9 +55,11 @@ void print_linked_list_no_recursive_ed(node_ed *head)
   while(head != NULL)
   {
     printf("%c\n", head->item);
+    head->index_node = index_node--;
     head = head->next_node;
   }
 }
+/*
 //Imprimindo a lista - forma recursiva
 void print_linked_list_recursive_ed(node_ed *head)
 {
@@ -66,6 +70,7 @@ void print_linked_list_recursive_ed(node_ed *head)
     print_linked_list_recursive_ed(head->next_node);
   }
 }
+*/
 //Buscando elemento
 bool search_element_ed(node_ed *head, int item)
 {
@@ -104,6 +109,29 @@ void remove_node_ed(node_ed *head, int item)
 
   free(current);
 }
+
+int size_linked_list(node_ed *list)
+{
+  int size_list = 0;
+
+  while (list != NULL)
+  {
+    size_list++;
+    list = list->next_node;
+  }
+  return size_list;
+}
+
+//Variáveis globais
+node_ed *l1_aux = create_linked_list_ed();
+node_ed *l2_aux = create_linked_list_ed();
+
+//Função para calcular a maior ocorrencia de uma lista
+void max_occurence(node *l1, node *l2)
+{
+
+}
+
 int main()
 {
   node_ed *ll_head = create_linked_list_ed();

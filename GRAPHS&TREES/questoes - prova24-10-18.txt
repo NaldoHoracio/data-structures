@@ -1,0 +1,8 @@
+Dado um grafo
+i) me diga o sumidouro: vértice a partir do qual não se pode ir para outros vértices (ninguém sai dele)
+ii) Fonte: alguém saindo do vértice (arestas)
+iii) Existe raiz
+iv) Se é conexo, completo ou se o caminho ... existe
+
+Grafo especial - árvore
+Dado uma sequencia de números, construa uma árvore binária com esses números.
