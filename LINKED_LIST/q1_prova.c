@@ -26,8 +26,8 @@ int is_empty_doubly_ll_ed(doubly_ll *head)
   return (head == NULL);
 }
 
-//Adicionando elemento em uma lista dupla
-doubly_ll* add_double_ll(doubly_ll *head, int item)
+//Adicionando elemento no começo em uma lista dupla
+doubly_ll* add_begin_dll(doubly_ll *head, int item)
 {
   doubly_ll *new_node = (doubly_ll*) malloc(sizeof(doubly_ll));
   new_node->item = item;
@@ -58,8 +58,8 @@ void print_doubly_ll_backward(doubly_ll *tail)
 {
   if(tail != NULL)
   {
-    print_doubly_ll_backward(tail->previous_node);
     printf("%d\n", tail->item);
+    print_doubly_ll_backward(tail->previous_node);
   }
 }
 //Imprimindo a da cabeça para a cauda
@@ -93,58 +93,91 @@ doubly_ll* remove_doubly_ll(doubly_ll *head, int item)
   free(current);
   return head;
 }
+//Tamanho da lista dupla
+int size_doubly_ll(doubly_ll *ll)
+{
+  int size_list = 0;
+  while (ll != NULL)
+  {
+    size_list++;
+    ll = ll->next_node;
+  }
+  return size_list;
+}
+
+void swap(int *x, int *y)
+{
+  int aux = *x;
+  *x = *y;
+  *y = aux;
+}
+
+//Ordenando a lista dupla
+void decrescente_bubble_v1(doubly_ll *list)
+{
+  int i, swapped;
+  doubly_ll *current, *aux = NULL;
+
+  if(list == NULL) return;
+
+  //Laço para percorrer a lista
+  do {
+    swapped = 0;
+    current = list;
+    //Laço para ordenar a lista e deslocar aux da cauda para frente
+    while(current->next_node != aux)
+    {
+      if(current->item < current->next_node->item)
+      {
+        swap(&current->item, &current->next_node->item);
+      }
+      current = current->next_node;
+    }
+    aux = current;
+  } while(swapped == 1);
+}
+
+//Ordenando a lista dupla
+void decrescente_bubble_v2(doubly_ll *list, int size_list)
+{
+  int i, j;
+  for (j = 1; j <= size_list; j++)
+  {
+    for (i = 0; i < (size_list - 1); i++)
+    {
+      if (list->item < list->next_node->item) swap(&list->item,&list->next_node->item);
+    }
+  }
+}
 
 int main()
 {
   doubly_ll *ll_doubly = create_doubly_linked_list_ed();
   //node_ed *ll_last = create_linked_list_ed();
-  int n, i;
+  int n, i, continuar = 1;
 
-  for(i = 0; i < SIZE; ++i)
-  {
+  do {
     printf("Digite um numero:\n");
     scanf("%d", &n);
-    ll_doubly = add_double_ll(ll_doubly,n);
-    //add_on_last_ed(ll_last,n);
-  }
-  printf("Lista de tras pra frente:\n");
-  print_doubly_ll_backward(ll_doubly);
+    ll_doubly = add_begin_dll(ll_doubly,n);
+    printf("Continuar? (0 - Nao/ 1 - Sim)\n");
+    scanf("%d", &continuar);
+  } while(continuar == 1);
+
+  printf("Tamanho da lista:\n");
+  int size_list = size_doubly_ll(ll_doubly);
+  printf("%d\n", size_list);
   printf("\n");
 
-  printf("Lista de frente pra tras:\n");
+  printf("Lista dupla antes da ordenacao:\n");
   print_doubly_ll_forward(ll_doubly);
   printf("\n");
 
+  //Chamando função para ordenar
+  decrescente_bubble_v1(ll_doubly);
 
-  printf("Digite um numero que voce deseja procurar:\n");
-  scanf("%d", &n);
-  if(search_doubly_ll(ll_doubly,n) == true) printf("O elemento %d esta na lista.\n", n);
-  else printf("O elemento %d nao esta na lista.\n", n);
+  printf("Lista dupla em ordem decrescente:\n");
+  print_doubly_ll_forward(ll_doubly);
 
-  printf("Digite um numero que voce deseja remover:\n");
-  scanf("%d", &n);
-
-  if(search_doubly_ll(ll_doubly,n) == true)
-  {
-    remove_doubly_ll(ll_doubly,n);
-    printf("Lista de tras pra frente:\n");
-    print_doubly_ll_backward(ll_doubly);
-    printf("\n");
-
-    printf("Lista de frente pra tras:\n");
-    print_doubly_ll_forward(ll_doubly);
-    printf("\n");
-  }else
-  {
-    printf("O elemento %d nao esta na lista.\n", n);
-
-    printf("Lista de tras pra frente:\n");
-    print_doubly_ll_backward(ll_doubly);
-    printf("\n");
-
-    printf("Lista de frente pra tras:\n");
-    print_doubly_ll_forward(ll_doubly);
-    printf("\n");
-  }
   return 0;
 }
