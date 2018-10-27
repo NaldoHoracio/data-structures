@@ -156,6 +156,14 @@ int main()
   printf("\n");
   // Se o numero de elementos na lista é igual ao numero de vertices
   // Então o grafo é completo
-  if(size_linked_list(ll_vertex_is_adj) == n_vertex)
+  (n_vertex == 1 || size_linked_list(ll_vertex_is_adj) == n_vertex) ? printf("O grafo eh completo!\n") : printf("O grafo nao eh completo!\n");
+
+  printf("Matriz de adjacência do grafo:\n");
+  for(i = 0; i < n_vertex; ++i)
+  {
+    for(j = 0; j < n_vertex; ++j)printf("%d ", matrix_adj[i][j]);
+    printf("\n");
+  }
+
   return 0;
 }
