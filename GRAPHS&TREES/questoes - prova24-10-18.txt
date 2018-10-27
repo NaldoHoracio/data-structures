@@ -1,3 +1,12 @@
+﻿DIA 10-10-2018
+GRAFO
+1) Se é conexo
+2) Se tem loop
+3) É completo
+4) Caminho de um vértice para outro vértice
+
+DIA 22-10-2018
+
 Dado um grafo
 i) me diga o sumidouro: vértice a partir do qual não se pode ir para outros vértices (ninguém sai dele)
 ii) Fonte: alguém saindo do vértice (arestas)
