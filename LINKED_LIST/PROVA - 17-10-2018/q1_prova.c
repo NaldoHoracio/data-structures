@@ -137,6 +137,7 @@ void decrescente_bubble_v1(doubly_ll *list)
   } while(swapped == 1);
 }
 
+/*
 //Ordenando a lista dupla
 void decrescente_bubble_v2(doubly_ll *list, int size_list)
 {
@@ -149,19 +150,53 @@ void decrescente_bubble_v2(doubly_ll *list, int size_list)
     }
   }
 }
+*/
+bool validing_string(char c)
+{
+  return (c == '0' || c == '1' || c == '2' || c == '3' || c == '4'|| c == '5' || c == '6' || c == '7' || c == '8' || c == '9') ? true : false;
+}
 
 int main()
 {
   doubly_ll *ll_doubly = create_doubly_linked_list_ed();
   //node_ed *ll_last = create_linked_list_ed();
+  char n_aux[20], continuar_aux[1];
   int n, i, continuar = 1;
 
   do {
     printf("Digite um numero:\n");
-    scanf("%d", &n);
-    ll_doubly = add_begin_dll(ll_doubly,n);
+    scanf("%s", n_aux);
+    getchar();// Lendo \n
+
+    //Verificando se a string é válida
+    for(i = 0; i < strlen(n_aux); ++i)
+    {
+      if(validing_string(n_aux[i]))
+      {
+        continue;
+      }else{
+        printf("Número invalido!\n");
+        break;
+      }
+    }
+    n = atoi(n_aux);// Transformando a string num inteiro
+    // Coloca na lista somente se o numero for maior que zero
+    if(n >= 0) ll_doubly = add_begin_dll(ll_doubly,n);
     printf("Continuar? (0 - Nao/ 1 - Sim)\n");
-    scanf("%d", &continuar);
+    scanf("%s", continuar_aux);
+    getchar();
+    //Verificando se a string é válida
+    for(i = 0; i < strlen(n_aux); ++i)
+    {
+      if(validing_string(continuar_aux[i]))
+      {
+        continue;
+      }else{
+        printf("Número invalido!\n");
+        break;
+      }
+    }
+    continuar = atoi(continuar_aux);// Transformando em um numero
   } while(continuar == 1);
 
   printf("Tamanho da lista:\n");
@@ -174,6 +209,7 @@ int main()
   printf("\n");
 
   //Chamando função para ordenar
+  decrescente_bubble_v1(ll_doubly);
   decrescente_bubble_v1(ll_doubly);
 
   printf("Lista dupla em ordem decrescente:\n");
