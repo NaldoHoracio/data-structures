@@ -1,0 +1,28 @@
+LISTA SIMPLES
+-Tipo:
+	info + ponteiro para o próximo nó.
+-Criar lista:
+	verificar se tem espaço;
+	ponteiro p/ a primeira posição;
+	primeiro->info = info;
+	primeiro->next = NULL;
+
+-Inserir na primeira posição
+	alocar memoria para o nó;
+	no->info = info;
+	no->next = primeiro da lista;
+	lista = no;
+-Inserir na última posição
+	u = lista;
+	enquanto(u->next != NULL)
+		u = u->next;
+	alocar memoria para o nó;
+	no->info = info;
+	u->next = no;
+-O x pertence a lista
+	u = lista;
+	enquanto(u != NULL)
+		if(u->info == x)
+			return true;
+		u = u->next;
+	return false;
