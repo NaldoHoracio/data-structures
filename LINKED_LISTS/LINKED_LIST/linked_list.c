@@ -51,15 +51,56 @@ struct node* remove(struct node *head, int item)
 
 void print_linked_list(struct node *head)
 {
-  while (!is_empty(head))
+  if(!is_empty(head))
   {
     printf("%d\n", head->item);
-    head = head->next_node;
-  } 
+    print_linked_list(head->next_node);
+  }
 }
 
 int main()
 {
-  printf("Hello world!\n");
+  int op;
+  struct node* list = create_linked_list();
+  int item;
+  printf("Digite a opcao desejada:\n");
+  printf("1 - Adicionar elemento\n2 - Buscar elemento\n3 - Remover elemento\n4 - Imprimir a lista\n");
+  scanf("%d", &op);
+  
+  do
+  {
+    switch (op)
+    {
+    case 1:
+      printf("Digite o numero que deseja inserir:\n");
+      scanf("%d", &item);
+      list = add(list,item);
+      break;
+    case 2:
+      printf("Digite um numero que voce deseja encontrar:\n");
+      scanf("%d", &item);
+      list = search(list,item);
+      if(!is_empty(list)) printf("O elemendo %d existe.\n", item);
+      else printf("O elemento %d nao existe.\n", item);
+      break;
+    case 3:
+      printf("Digite um numero que voce deseja remover:\n");
+      scanf("%d", &item);
+      list = remove(list,item);
+      break;
+    case 4:
+      printf("LISTA\n");
+      print_linked_list(list);
+      break;
+    default:
+      printf("Essa opcao nao existe! Digite um numero entre 1 e 4.\n");
+      break;
+    }
+    printf("Digite a opcao desejada:\n");
+    printf("1 - Adicionar elemento\n2 - Buscar elemento\n3 - Remover elemento\n4 - Imprimir a lista\n");
+    scanf("%d", &op);
+  } while (1);
+  
+
   return 0;
 }
