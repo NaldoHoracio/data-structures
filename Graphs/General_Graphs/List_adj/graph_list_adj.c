@@ -9,13 +9,13 @@
 //Struct grafo usando lista de adjacência
 
 //Lista de adjacência
-struct Adj_List
+struct adj_list
 {
   int item;
-  Adj_List *next_node;
+  struct adj_list *next_node;
 };
 //Definindo lista encadeada
-typedef struct Adj_List adj_list_ed;
+typedef struct adj_list adj_list_ed;
 
 //Criando struct tipo grafo
 struct Graph
